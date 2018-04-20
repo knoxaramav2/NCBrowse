@@ -10,7 +10,7 @@ static void startup() __attribute__((constructor));
 static void shutdown() __attribute__((destructor));
 
 void startup(){
-    cout << "HTMD" << endl;
+        cout << "LOADED HTMD" << endl;
 }
 
 void shutdown(){

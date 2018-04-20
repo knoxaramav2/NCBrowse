@@ -3,5 +3,6 @@
 
 #include "common.h"
 #include "htmd.h"
+#include "graphics.h"
 
 #endif

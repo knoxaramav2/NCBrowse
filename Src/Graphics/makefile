@@ -2,13 +2,13 @@
 
 LFLAGS = $(COMLIB)
 OUT = libgraphic.so
-SRC = graphics.cpp
+SRC = graphics.cpp console.cpp
 
 all:
-	$(CC) $(COMMON) $(LFLAGS) $(SRC) -shared -o $(BINPATH)/$(OUT)
+	$(CC) $(COMMON) $(LFLAGS) $(SRC) -shared -o $(BINPATH)/$(OUT) -lncurses
 
 $(BINPATH)$(OUT) : $(O_SRC)
-	$(CC) $(COMMON) $(PLATFORM) $(DBGFLAGS) -shared -o $@ $(O_SRC) $(LFLAGS)
+	$(CC) $(COMMON) $(PLATFORM) $(DBGFLAGS) -shared -o $@ $(O_SRC) $(LFLAGS) -lncurses
 
 .PHONY: clean
 clean:

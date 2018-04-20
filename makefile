@@ -5,7 +5,7 @@ SUBDIRS = Src/Common/ Src/Graphics/ Src/HTMD/ Src/TBrowse/
 BITVRS=64
 BINPATH=$(shell pwd)/bin
 DEBUG=false
-COMMON= -Iheaders/ -std=c++11 -Iheaders -Wall -g -m$(BITVRS) -L$(BINPATH) -lncurses
+COMMON= -Iheaders/ -std=c++11 -Wall -g -m$(BITVRS) -L$(BINPATH)
 OUTALIAS=tbr
 CLEANTEXT = o a so
 O_SRC = $(SRC:.cpp=.o)
