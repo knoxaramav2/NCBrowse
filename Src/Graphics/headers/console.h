@@ -17,17 +17,35 @@ struct Key{
     KeyType type;
 };
 
+struct Coord{
+    int x;
+    int y;
+};
+
+class Panel{
+    WINDOW * _win;
+    int _x, _y, _width, _height;
+
+    public:
+
+    Panel();
+    Panel(int, int, int, int);
+    ~Panel();
+};
+
 class Console{
 
-    WINDOW * _main;
-    WINDOW * _toolbar;
-    WINDOW * _status;
-    WINDOW * _util;
+    Panel _main;
+    Panel _toolbar;
+    Panel _status;
+    Panel _util;
 
     public:
 
     Console();
     ~Console();
+
+    void resize();
 
     Key getKey();
 
@@ -36,6 +54,7 @@ class Console{
 extern Console * _terminal;
 
 Console * getTerminal();
+Coord getMouseLoc();
 
 //}
 

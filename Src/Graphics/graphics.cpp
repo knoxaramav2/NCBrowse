@@ -27,6 +27,7 @@ void startup(){
     noecho();
     keypad(stdscr, true);
     cbreak();
+    mousemask(ALL_MOUSE_EVENTS, NULL);
 
     initColors();
 
