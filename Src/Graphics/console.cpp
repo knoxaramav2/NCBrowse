@@ -17,9 +17,8 @@ Key Console::getKey(){
     int i = getch();
     KeyType kt = KeyType::ascii;
 
-    return Key{.val = i, .type = kt};
+    return Key{.key = i, .type = kt};
 }
-
 
 Console * getTerminal(){
     return _terminal;

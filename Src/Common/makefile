@@ -1,7 +1,7 @@
 #Compiles Commons library
 
 OUT = libcommon.so
-SRC=common.cpp
+SRC=common.cpp util.cpp
 
 all:
 	$(CC) $(COMMON) $(SRC) -shared -o $(BINPATH)/$(OUT) $(OSMODE) $(PLATFORM)

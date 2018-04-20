@@ -1,11 +1,11 @@
 #compiles entire TBrowser project
 
 CC = g++
-SUBDIRS = Src/Common/ Src/Graphics/ Src/HTMD/ Src/TBrowse/
+SUBDIRS = Src/Common/ Src/Graphics/ Src/HTMD/ Src/FBrowse/ Src/TBrowse/
 BITVRS=64
 BINPATH=$(shell pwd)/bin
 DEBUG=false
-COMMON= -Iheaders/ -std=c++11 -Wall -g -m$(BITVRS) -L$(BINPATH)
+COMMON= -Iheaders/ -std=c++17 -Wall -g -m$(BITVRS) -L$(BINPATH)
 OUTALIAS=tbr
 CLEANTEXT = o a so
 O_SRC = $(SRC:.cpp=.o)

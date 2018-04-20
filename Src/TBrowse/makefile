@@ -4,6 +4,7 @@ CFLAGS = $(COMMON)
 LFLAGS = -lm -ldl -lpthread -L$(BINPATH) \
 -I../HTMD/headers/ -l:libhtmd.so  \
 -I../Graphics/headers/ -l:libgraphic.so \
+-I../FBrowse/headers/ -l:libfbrowse.so \
 $(COMLIB) \
 -Wl,-rpath=$(BINPATH)
 

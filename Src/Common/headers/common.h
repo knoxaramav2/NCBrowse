@@ -1,6 +1,7 @@
 #ifndef COMMON
 #define COMMON
 
-void cTest();
+#include "util.h"
+#include "html.h"
 
 #endif

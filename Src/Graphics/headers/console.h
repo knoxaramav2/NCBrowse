@@ -13,7 +13,7 @@ enum KeyType{
 };
 
 struct Key{
-    int val;
+    int key;
     KeyType type;
 };
 
