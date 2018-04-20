@@ -1,15 +1,26 @@
 #include "console.h"
 
+//using namespace CONSOLE;
+
+//Console * _terminal;
 
 Console::Console(){
-
-    //initscr();
-    //raw();
-    //keypad(stdscr, true);
-    //noecho();
     
 }
 
 Console::~Console(){
-    //endwin();
+
+}
+
+
+Key Console::getKey(){
+    int i = getch();
+    KeyType kt = KeyType::ascii;
+
+    return Key{.val = i, .type = kt};
+}
+
+
+Console * getTerminal(){
+    return _terminal;
 }
