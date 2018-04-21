@@ -1,7 +1,7 @@
 #compiles entire TBrowser project
 
 CC = g++
-SUBDIRS = Src/Common/ Src/Graphics/ Src/HTMD/ Src/FBrowse/ Src/TBrowse/
+SUBDIRS = Src/Common/ Src/HTMD/ Src/FBrowse/ Src/TBrowse/
 BITVRS=64
 BINPATH=$(shell pwd)/bin
 DEBUG=false
@@ -16,8 +16,8 @@ ifeq ($(shell uname), Linux)
 	FixPath = $1
 	PLATFORM = -D__LINUX
 	OSMODE = -DBITMODE=$(BITVRS)
-	CFLAGS += -fPIC
 	EXT=
+	COMMON += -fPIC
 else
 #Windows
 	FixPath = $(subst /,\,$1)

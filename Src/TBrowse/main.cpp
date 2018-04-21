@@ -1,15 +1,15 @@
-
-/*#include <string>
+#include <string>
 #include <iostream>
 
 #include "modules.h"
 
 #include "ncurses.h"
 
+#include "graphics.h"
+
 using namespace std;
 
-int main(int argc, char ** argv){
-
+void testDirs(){
     vector <string> test = splitBy("Test string/and/stuff/wasda", '/');
 
     for (string s : test){
@@ -21,138 +21,40 @@ int main(int argc, char ** argv){
     for (Path s : ptest){
         cout << s.toString() << endl;
     }
-
-    for (;;){
-
-        int ch = getch();
-        if (ch != KEY_MOUSE)
-            continue;
-
-        Coord c = getMouseLoc();
-        cout << c.x << " " << c.y << endl;
-    }
-
-    return 0;
-}*/
-
-#include <ncurses.h>
-#include <cstring>
-#include <vector>
-#include <string>
-
-using namespace std;
-
-#define WIDTH 30
-#define HEIGHT 10 
-
-int startx = 0;
-int starty = 0;
-
-/*
-char *choices[] = { 	"Choice 1",
-			"Choice 2",
-			"Choice 3",
-			"Choice 4",
-			"Exit",
-		  };
-*/
-
-vector <string> choices;
-
-int n_choices = sizeof(choices) / sizeof(char *);
-
-void print_menu(WINDOW *menu_win, int highlight);
-void report_choice(int mouse_x, int mouse_y, int *p_choice);
-
-int main()
-{	int c, choice = 0;
-	WINDOW *menu_win;
-	MEVENT event;
-
-    choices.push_back("Chouce 1");
-    choices.push_back("Chouce 2");
-    choices.push_back("Chouce 3");
-    choices.push_back("Chouce 4");
-    choices.push_back("Exit");
-
-	/* Initialize curses */
-	initscr();
-	clear();
-	noecho();
-	cbreak();	//Line buffering disabled. pass on everything
-
-	/* Try to put the window in the middle of screen */
-	startx = (80 - WIDTH) / 2;
-	starty = (24 - HEIGHT) / 2;
-	
-	attron(A_REVERSE);
-	mvprintw(23, 1, "Click on Exit to quit (Works best in a virtual console)");
-	refresh();
-	attroff(A_REVERSE);
-
-	/* Print the menu for the first time */
-	menu_win = newwin(HEIGHT, WIDTH, starty, startx);
-	print_menu(menu_win, 1);
-	/* Get all the mouse events */
-	mousemask(ALL_MOUSE_EVENTS, NULL);
-	
-	while(1)
-	{	c = wgetch(menu_win);
-		switch(c)
-		{	case KEY_MOUSE:
-			if(getmouse(&event) == OK)
-			{	/* When the user clicks left mouse button */
-				if(event.bstate & BUTTON1_PRESSED)
-				{	report_choice(event.x + 1, event.y + 1, &choice);
-					if(choice == -1) //Exit chosen
-						goto end;
-					mvprintw(22, 1, "Choice made is : %d String Chosen is \"%10s\"", choice, choices[choice - 1].c_str());
-					refresh(); 
-				}
-			}
-			print_menu(menu_win, choice);
-			break;
-		}
-	}		
-end:
-	endwin();
-	return 0;
 }
 
 
-void print_menu(WINDOW *menu_win, int highlight)
-{
-	int x, y, i;	
 
-	x = 2;
-	y = 2;
-	box(menu_win, 0, 0);
-	for(i = 0; i < n_choices; ++i)
-	{	if(highlight == i + 1)
-		{	wattron(menu_win, A_REVERSE); 
-			mvwprintw(menu_win, y, x, "%s", choices[i].c_str());
-			wattroff(menu_win, A_REVERSE);
+int main(int argc, char *argv[])
+{	
+    
+	initTerminal();
+
+	Key k;
+	Console * cs = getTerminal();
+
+	//WINDOW * w = newwin(5, 5, 0, 0);
+	//box(w, '*', '*');
+	//wrefresh(w);
+
+	int input = 0;
+
+	//while ((k=Console::getKey()).key != KEY_F(1)){
+	while ((input = getch()) != KEY_F(1)){
+
+		switch (input){
+			case 9://TAB
+				cs->focusNext();
+			break;
+			default:
+
+			break;
 		}
-		else
-			mvwprintw(menu_win, y, x, "%s", choices[i].c_str());
-		++y;
 	}
-	wrefresh(menu_win);
-}
 
-/* Report the choice according to mouse position */
-void report_choice(int mouse_x, int mouse_y, int *p_choice)
-{	int i,j, choice;
+	clear();
+	refresh();
+	endwin();
 
-	i = startx + 2;
-	j = starty + 3;
-	
-	for(choice = 0; choice < n_choices; ++choice)
-		if(mouse_y == j + choice && mouse_x >= i && mouse_x <= i + strlen(choices[choice].c_str()))
-		{	if(choice == n_choices - 1)
-				*p_choice = -1;		
-			else
-				*p_choice = choice + 1;	
-			break;
-		}
+	return 0;
 }
