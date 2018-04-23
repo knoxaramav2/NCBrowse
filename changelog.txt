@@ -1,0 +1,9 @@
+4/19    Skeleton
+4/20    More skeletons
+4/20    Fixed ncurses issues
+4/20    Turns out ncurses does not like to be in a shared object
+4/21    Controls, file system
+4/21    Turns out virtual inheritence does not like shared objects
+4/22    Colors, bug fixes
+4/23    Probably screwed up the renderer, but fixed other stuff
+4/23    Arrow Keys, Selected highlighting

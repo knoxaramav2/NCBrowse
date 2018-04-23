@@ -2,7 +2,7 @@
 
 LFLAGS = $(COMLIB)
 OUT = libfbrowse.so
-SRC = fbrowse.cpp directory.cpp
+SRC = fbrowse.cpp directory.cpp fdom.cpp
 
 all:
 	$(CC) $(COMMON) $(LFLAGS) $(SRC) -shared -o $(BINPATH)/$(OUT)

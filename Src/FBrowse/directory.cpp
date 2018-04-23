@@ -41,6 +41,9 @@ Path::Path(string _path){
     if (!isFolder){
         target = path[path.size()-1];
         path.pop_back();
+
+        if (target[target.size()-1] == '/')
+            target.pop_back();
     }
 }
 
@@ -51,7 +54,6 @@ Path::Path(string _path, string _target){
     target = _target;
 }
 
-
 string Path::toString(){
     string ret;
 
@@ -59,9 +61,21 @@ string Path::toString(){
         ret += str + '/';
     }
 
-    ret += target;
+    if (ret.size() > 0 && ret[ret.size()-1] == '/')
+        ret.pop_back();
+
+    //ret += target;
 
     return ret;
+}
+
+
+Directory::Directory(){
+
+}
+
+Directory::Directory(string uri){
+    _currDirectory = Path(uri);
 }
 
 string Directory::getCurrentDir(){
@@ -82,8 +96,13 @@ vector <Path> getDirList(string path){
         return ret;
     }
 
+    string appPath;
+    if (path != "." && path != "..")
+        appPath = path;
+
     while((ent = readdir(dir))){
-        ret.push_back(Path(path + "/" + ent->d_name));
+        
+        ret.push_back(Path(appPath + "/" + ent->d_name));
     }
 
     closedir(dir);

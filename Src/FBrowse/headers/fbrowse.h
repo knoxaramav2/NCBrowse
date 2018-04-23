@@ -22,6 +22,9 @@ class Directory{
 
     public:
 
+    Directory();
+    Directory(std::string);
+
     std::string getCurrentDir();
     std::vector <Path> getCurrDirList();
 

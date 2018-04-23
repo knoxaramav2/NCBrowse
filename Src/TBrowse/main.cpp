@@ -2,6 +2,9 @@
 #include <iostream>
 
 #include "modules.h"
+#include "event.h"
+#include "browseinfo.h"
+#include "state.h"
 
 #include "ncurses.h"
 
@@ -10,46 +13,32 @@
 using namespace std;
 
 void testDirs(){
-    vector <string> test = splitBy("Test string/and/stuff/wasda", '/');
 
-    for (string s : test){
-        cout << s << endl;
-    }
-
-    vector <Path> ptest = getDirList("C:\\Users\\MMI\\Documents");
+    vector <Path> ptest = getDirList("");
 
     for (Path s : ptest){
         cout << s.toString() << endl;
     }
 }
 
-
-
 int main(int argc, char *argv[])
 {	
-    
+	_bi.setURI(argv[0]);
 	initTerminal();
 
-	Key k;
+	FDOM fd(argv[0]);
 	Console * cs = getTerminal();
-
-	//WINDOW * w = newwin(5, 5, 0, 0);
-	//box(w, '*', '*');
-	//wrefresh(w);
 
 	int input = 0;
 
 	//while ((k=Console::getKey()).key != KEY_F(1)){
-	while ((input = getch()) != KEY_F(1)){
+	while (((input = getch()) != KEY_F(1)) && _state.active){
+		Event e{
+			.type = KEY_STROKE,
+			.val = input
+		};
 
-		switch (input){
-			case 9://TAB
-				cs->focusNext();
-			break;
-			default:
-
-			break;
-		}
+		cs->action(e);
 	}
 
 	clear();

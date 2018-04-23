@@ -9,7 +9,7 @@ $(COMLIB) \
 
 OUT = $(OUTALIAS)
 O_SRC = $(SRC:.cpp=.o)
-SRC=main.cpp graphics.cpp
+SRC= state.cpp browseinfo.cpp main.cpp graphics.cpp
 
 all:
 	$(CC) $(SRC) $(CFLAGS) -o $(RUNPATH) $(LFLAGS) -lncurses

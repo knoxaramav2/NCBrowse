@@ -2,6 +2,6 @@
 #define COMMON
 
 #include "util.h"
-#include "html.h"
+#include "dom.h"
 
 #endif
