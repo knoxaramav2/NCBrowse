@@ -28,7 +28,7 @@ void Element::addChild(Element * e){
 
 void Element::addSibling(Element * e){
     this->right = e;
-    e->left = e;
+    e->left = this;
 }
 
 DOM::DOM(){
@@ -58,6 +58,12 @@ void DOM::rewind(){
 bool DOM::isEnd(){
     return _end;
 }
+
+void DOM::trigger(){
+    if (!_itr)
+        return;
+}
+
 
 Element * DOM::getCurrent(){
     return _itr;

@@ -30,8 +30,6 @@ Event ContentPanel::action(Event e){
         break;
     }
 
-    return Event {.type = NO_ACTION};
-
     return Event{.type = NO_ACTION};
 }
 
@@ -47,7 +45,9 @@ Event ToolPanel::action(Event e){
         case KEY_DOWN: arrowDOMTarget(SEL_DOWN); break;
         case KEY_LEFT: arrowDOMTarget(SEL_LEFT); break;
         case KEY_RIGHT: arrowDOMTarget(SEL_RIGHT); break;
+        case KEY_ENTER:{
             
+        }
         break;
     }
 
@@ -416,6 +416,10 @@ void initTerminal(){
 
 }
 
+void Console::updateContent(){
+    updateContentDom(_panels[WIN_MAIN]->_getDOM());
+}
+
 Console * getTerminal(){
     return _terminal;
 }
@@ -451,6 +455,7 @@ DOM * initToolDom(){
     bHome->value = "HOME";
     bHome->action = [](void){
         _bi.setURI("C://");
+        _terminal->updateContent();
         return int(1);
     };
 
@@ -468,6 +473,8 @@ DOM * updateContentDom(DOM * cd){
 
     if (cd == nullptr)
         cd = new DOM();
+    else
+        cd->clear();
     
     vector <Path> paths = _bi.getDirList();
 

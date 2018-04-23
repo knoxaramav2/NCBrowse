@@ -70,6 +70,8 @@ class DOM{
 
     bool isEnd();
 
+    void trigger();
+
 };
 
 #endif

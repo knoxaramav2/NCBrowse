@@ -10,7 +10,7 @@ static void startup() __attribute__((constructor));
 static void shutdown() __attribute__((destructor));
 
 void startup(){
-    cout << "COMMON" << endl;
+    //cout << "COMMON" << endl;
 }
 
 void shutdown(){

@@ -126,6 +126,8 @@ class Console{
 
     static WinInfo getTermDim();
     static Key getKey();
+
+    void updateContent();
 };
 
 extern Console * _terminal;
